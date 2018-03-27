@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+  <div id="calculator">
+    <h1>Calculator</h1>
+    <div id="display">
+      <span id='valueOne'> </span>
+      <span id='op'> </span>
+      <span id='valueTwo'> </span>
+      <span id='ans'> </span>
+    </div>
+
+      <p>
+        <label for="firstValue">Enter Value #1</label>
+        <input id="firstValue" type="text"  name="valueOne"/>
+      </p>
+      <p>
+        <label for="addition">+</label>
+        <input id="addition"type="radio" name="operation" value="add"/>
+        <label for="subtraction">-</label>
+        <input id="subtraction" type="radio" name="operation" value="subtract"/>
+        <label for="multiplication">x</label>
+        <input id="multiplication"type="radio" name="operation" value="multiply"/>
+        <label for="division">/</label>
+        <input id="division"type="radio" name="operation" value="divide"/>
+      </p>
+      <p>
+        <label for="secondValue">Enter Value #2</label>
+        <input id="secondValue" type="text"  name="valueTwo"/>
+      </p>
+      <!-- <p>
+        <input id ="eq" type="submit" value="="/>
+      </p> -->
+
+
+    <script>
+    let op;
+    let answer;
+    let valueOne;
+    let valueTwo;
+
+    document.getElementById("firstValue").addEventListener("keyup", changeFirstValue);
+    document.getElementById("secondValue").addEventListener("keyup", changeSecondValue);
+    document.getElementById("addition").addEventListener("click", changeOpAdd);
+    document.getElementById("subtraction").addEventListener("click", changeOpSub);
+    document.getElementById("multiplication").addEventListener("click", changeOpMult);
+    document.getElementById("division").addEventListener("click", changeOpDiv);
+
+
+
+
+    function changeFirstValue(){
+      valueOne = document.getElementById("firstValue").value;
+      valueOne = parseInt(valueOne);
+      if(isNaN(valueOne)){
+        document.getElementById("valueOne").innerText="";
+      }
+      else{
+        document.getElementById("valueOne").innerText=valueOne;
+      }
+      equals();
+    }
+
+    function changeSecondValue(){
+      valueTwo = document.getElementById("secondValue").value;
+      valueTwo = parseInt(valueTwo);
+      if(isNaN(valueTwo)){
+        document.getElementById("valueTwo").innerText="";
+      }
+      else{
+        document.getElementById("valueTwo").innerText=valueTwo;
+      }
+      equals();
+    }
+
+    function changeOpAdd(){
+      op = "+";
+      opChange();
+    }
+    function changeOpSub(){
+      op = "-";
+      opChange();
+    }
+    function changeOpMult(){
+      op = "x";
+      opChange();
+    }
+    function changeOpDiv(){
+      op = "/";
+      opChange();
+    }
+
+    function opChange(){
+      document.getElementById("op").innerText=op;
+      equals();
+    }
+
+    function equals(){
+      if(document.getElementById("addition").checked){
+        answer = valueOne + valueTwo;
+      }
+      else if(document.getElementById("subtraction").checked){
+        answer = valueOne - valueTwo;
+      }
+      else if(document.getElementById("multiplication").checked){
+        answer = valueOne * valueTwo;
+      }
+      else if(document.getElementById("division").checked){
+        answer = valueOne / valueTwo;
+      }
+      if(answer == null || isNaN(answer)){
+        document.getElementById("ans").innerText= "";
+      }
+      else{
+      document.getElementById("ans").innerText= "= " + answer;
+     }
+    }
+    </script>
+  </div>
+
+</body>
+</html>
